@@ -1,0 +1,9 @@
+1. Write a function to find the simple interest.
+2. Write a function to find whether a given number is odd or even
+3. Write a function to find whether a given number is prime or not
+4. Write a function to convert celsius to fahrenheit or wise versa
+5. Write a function to calcuate electricity bill for your house
+
+usage upto 100 unit - 2 rupees/ unit
+usage above 100 unit and less than 200 unit - 3 rupees/unit
+usage above 200 unit - 4 rupees/unit
