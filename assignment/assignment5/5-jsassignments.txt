@@ -1,0 +1,5 @@
+1. Find the sum of elements of a given array
+for example : [100,30,40,1,300,250]
+2. Find the maximum element of the array without using predefined function
+3. Find the average value of the given array
+4. Search whether a given element is present or not in an array.
