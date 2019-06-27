@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Account Prototype</title>
+</head>
+<body>
+<h1>Account prototype demo</h1>
+<script type="text/javascript">
+	function account(name,actno,mobile,mail)
+	{
+		this.name = name;
+		this.actno = actno;
+		this.mobile = mobile;
+		this.mail = mail;
+	}
+	account.prototype.balance = 0;
+	account.prototype.deposit = function (actno,amt){
+		this.balance = this.balance + amt;
+		return this.balance;
+	}
+	account.prototype.withdraw = function (actno,amt){
+		this.balance = this.balance - amt;
+		return this.balance;
+	}
+	account.prototype.checkBalance = function (actno){
+		return this.balance;
+	}
+	var raghuact = new account('raghu',101,9845547471,'prasadraghuks@gmail.com');
+	var actno = raghuact.actno;
+	var bal = 0;
+	bal = raghuact.deposit(actno,10000);
+	console.log('After 1st Deposit ',bal);
+	bal = raghuact.deposit(actno,25000);
+	console.log('After 2nd Deposit ',bal);
+	bal = raghuact.withdraw(actno,18000);
+	console.log('After 1st withdraw ',bal);
+	bal = raghuact.checkBalance(actno);
+	console.log('check balance ',bal);
+</script>
+</body>
+</html>

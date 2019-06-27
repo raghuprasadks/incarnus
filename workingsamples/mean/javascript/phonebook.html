@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Phone Book</title>
+</head>
+<body>
+	<h1>Phone Book</h1>	
+		<input type="text" id="name" placeholder="Enter your name"><br>
+		<input type="text" id="mobile" placeholder="Enter your mobile"><br>
+		<button onclick="createPhoneBook()">Submit</button>
+	<h1>Phone Book</h1>
+	<div id='result'></div>
+<script type="text/javascript">
+	phoneBook = [];
+	function createPhoneBook()
+	{
+		var name = document.getElementById("name").value;
+		var mobile = document.getElementById("mobile").value;
+		console.log('name : ',name,' mobile : ',mobile);
+		var ph = new phonebook(name,mobile);
+		phoneBook.push(ph);
+		displayPhoneBook();		
+	}
+	function displayPhoneBook()
+	{
+		var entry='';
+		for (i=0;i<phoneBook.length;i++)
+		{
+			currentry = phoneBook[i].name + ' - ' + phoneBook[i].mobile;
+			entry += currentry+"<br>";
+			console.log('entry : ',entry);			
+		}
+		document.getElementById('result').innerHTML = entry;
+	}
+	function phonebook(name,mobile)
+	{
+		this.name = name;
+		this.mobile = mobile;
+	}
+</script>
+</body>
+</html>

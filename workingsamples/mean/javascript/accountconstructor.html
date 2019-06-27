@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Account Constructor</title>
+</head>
+<body>
+<h1>Account Constructor Demo</h1>
+<script type="text/javascript">
+	
+	function account(name,actno,mobile,mail)
+	{
+		this.name = name;
+		this.actno = actno;
+		this.mobile = mobile;
+		this.mail = mail;
+	}
+	var raghuact = new account('raghu',101,9845547471,'prasadraghuks@gmail.com');
+	console.log('account number ',raghuact.actno);
+	raghuact.bank = "ICICI";	
+	var satvikact = new account('Satvik',102,9845547473,'satusaki@gmail.com');
+	console.log('account number ',satvikact.actno);
+	console.log('Bank ',satvikact.bank);
+	satvikact.info = function ()
+	{
+		console.log(this.name, ' ',this.mobile);
+	}
+	satvikact.info();
+</script>
+</body>
+</html>

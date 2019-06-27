@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Output</title>
+</head>
+<body>
+	<h1>output</h1>
+	<h2 id='res' style="color:green">Result of operation is displayed here</h2>
+	<h3 name='hname'>It's me h3</h3>
+	<h4 name='hname'>It's me h4</h4>
+	<script type="text/javascript">
+	console.log(5+10);
+	document.write(5+10);
+	window.alert('This is an alert');
+	document.getElementById('res').innerHTML = (5+10);
+	document.getElementById('res').style.color='blue';
+	document.getElementsByName('hname')[1].innerHTML='I know. I changed your name';
+</script>
+</body>
+</html>

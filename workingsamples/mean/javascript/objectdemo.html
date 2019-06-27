@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Object Demo</title>
+</head>
+<body>
+	<h1>Object Demo</h1>
+<script type="text/javascript">
+	var car = 
+	{
+		make :"Maruti",
+		model :"Swift",
+		price : 650000,
+		speed : 0,
+		start : function ()
+			{ 
+			this.speed =  5;
+			return this.speed;
+			},
+		move : function ()
+			{
+				this.speed += 10;
+				return this.speed;
+			},
+		stop : function ()
+			{
+				this.speed = 0;
+				return this.speed;
+			}
+	};
+	console.log(car.make,' ',car.model);
+	currspeed = 0;
+	currspeed = car.start();
+	console.log('started : speed',currspeed);
+	currspeed = car.move();
+	console.log('Moved 1: speed',currspeed);
+	currspeed = car.move();
+	console.log('Moved 2 : speed',currspeed);
+	currspeed = car.stop();
+	console.log('Stopped : speed',currspeed);
+</script>
+</body>
+</html>

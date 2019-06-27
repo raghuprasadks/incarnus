@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Array Assignments</title>
+</head>
+<body>
+<h1>Array Assigments</h1>
+<script type="text/javascript">
+function sumofarray(arr)
+{
+	var sum=0; 
+	for(i=0;i<arr.length;i++)
+	{
+		sum = sum +arr[i];
+		//sum += arr[i];
+	}
+	console.log('sum is ',sum);
+}
+data = [10,20,30,40,50];
+sumofarray(data);
+
+function maximumofarray(arr)
+{
+	var max=arr[0]; 
+	for(i=1;i<arr.length;i++)
+	{
+		if(arr[i] > max)
+		{
+			max = arr[i]
+		}		
+	}
+	console.log('Maximum element is ',max);
+}
+maximumofarray(data);
+</script>
+</body>
+</html>

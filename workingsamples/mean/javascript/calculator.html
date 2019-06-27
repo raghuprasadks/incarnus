@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Calculator</title>
+</head>
+<body>
+	<h1>Calculator Demo</h1>
+	<script type="text/javascript">		
+		function calculator(name)
+		{
+			this.name = name;
+		}
+		calculator.prototype.result=0;
+		calculator.prototype.add = function (num1,num2){
+			this.result = num1 + num2;
+			return this.result;
+		}
+		var mycalci = new calculator('C 100');
+		var res = mycalci.add(10,50);
+		console.log('result of addition is ',res);
+	</script>
+
+
+</body>
+</html>
