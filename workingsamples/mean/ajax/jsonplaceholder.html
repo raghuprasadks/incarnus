@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Json Placeholder</title>
+
+	<style type="text/css">
+		
+		li{
+			display: inline-block;
+			padding: 2px;
+			margin:0px;
+			border: 2px solid blue;
+		}
+	</style>
+</head>
+<body>
+	<h1>User List</h1>
+	<ul id="user">
+	</ul>
+<script type="text/javascript">
+var base = 'https://jsonplaceholder.typicode.com';
+fetch(base+"/users")
+.then(function(response){
+	response.json()
+	.then(function(userjson){
+		displayUser(userjson);	
+	//	for (i=0;i<userjson.length;i++)
+	//		console.log(userjson[i].name);
+
+	});
+});
+
+function displayUser(userjson)
+{
+	
+	var ul=document.getElementById("user");
+	
+	var liName = document.createElement("li");
+	var nodeName = document.createTextNode("name");
+	liName.appendChild(nodeName);
+	ul.appendChild(liName);
+
+	var liEmail = document.createElement("li");
+	var nodeEmail = document.createTextNode("Email");
+	liEmail.appendChild(nodeEmail);
+	ul.appendChild(liEmail);
+	
+	var liWebsite = document.createElement("li");
+	var nodeWebsite = document.createTextNode("Website");
+	liWebsite.appendChild(nodeWebsite);
+	ul.appendChild(liWebsite);
+}
+</script>
+</body>
+</html>
