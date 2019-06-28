@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Closures</title>
+</head>
+<body>
+<h1>Closures</h1>
+<script type="text/javascript">
+	
+function showName (firstName, lastName) { 
+	var nameIntro = "Your name is ";
+    // this inner function has access to the outer function's variables, including the parameter
+	function makeFullName () {         
+		return nameIntro + firstName + " " + lastName;     
+	}
+
+	return makeFullName (); 
+} 
+
+var name =showName ("Michael", "Jackson"); // Your name is Michael Jackson 
+console.log(name);
+</script>
+</body>
+</html>
