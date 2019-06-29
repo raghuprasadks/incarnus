@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>To Do List</title>
+</head>
+<body>
+<h1>To Do List</h1>
+<input type="text" id="todo" placeholder="Enter Task to be done"><button id='submit' mode='C' onclick="addToDo()">Submit</button>
+
+<!--<button id="del" onclick('deletetodo()')="">Delete</button>-->
+<div id="result"></div>
+<!--
+<button id='del' onclick="delete(i)"></button> -->
+
+<script type="text/javascript">
+	var todolist = [];
+	var index = 0;
+
+	function deleteToDo()
+	{
+		console.log('index to be removed '+index);
+		todolist.splice(index);
+		console.log('after removal ' +todolist);
+
+
+	}
+
+	function addToDo()
+	{
+		var todo = document.getElementById("todo").value;
+		var index = todolist.push(todo);
+		console.log(todolist);
+		var submit = document.getElementById('submit');
+		var mode = submit.getAttribute('mode');
+		if (mode == 'U')
+			updateToDo();
+		else
+			displayToDo(todo,index);
+	}
+
+	function displayToDo(todo,index){
+		var result = '';
+		var outerdiv = document.getElementById("result");
+	
+			var tododiv = document.createElement("div");
+			var todospan = document.createElement("span");
+			var todoedit = document.createElement("button");
+			var tododelete = document.createElement("button");
+			var brk = document.createElement("br")
+
+			tododiv.setAttribute("id","div"+index);
+			todoedit.setAttribute("id","edit"+index);
+			tododelete.setAttribute("id","delete"+index);
+
+			todospan.innerText = todo;
+			todoedit.innerText ="Edit";
+			tododelete.innerText ="Delete";
+			tododiv.appendChild(todospan);
+			tododiv.appendChild(todoedit);
+			tododiv.appendChild(tododelete);
+			tododiv.appendChild(brk);
+			outerdiv.append(tododiv);
+			todoedit.addEventListener("click",editToDo);
+			tododelete.addEventListener("click",deleteToDo);	
+
+
+	}
+
+	function editToDo(){
+		console.log('edit clicked');
+	//	console.log(this.parentNode.childNodes.firstChild);
+
+		console.log(this.parentNode.firstChild.innerHTML);
+		todo = this.parentNode.firstChild.innerHTML;
+		console.log('todo ',todo);
+		document.getElementById("todo").value = todo;
+		//var children = this.parentNode.childNodes.firstChild.innerHTML;
+		
+		//console.log(children);
+
+		var submit = document.getElementById('submit');
+		submit.setAttribute('mode','U');
+
+	}
+
+	function deleteToDo(){
+		//event.srcElement.id
+		console.log('edit clicked');
+		console.log(event.srcElement.id);
+		console.log(this.parentNode);
+		var pare = this.parentNode;
+		pare.remove();
+	}
+
+	function updateToDo()
+	{
+		console.log('update to do');
+	}
+
+</script>
+</body>
+</html>

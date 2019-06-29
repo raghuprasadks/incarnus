@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Open Weather MAP</title>
+</head>
+<body>
+	<h1>Open Weather MAP</h1>
+		<label>Temperature</label>
+	<div id="temp"> Temperature in my City</div>
+	<br>
+	<label>Humidity</label>
+	<div id="humi"> Humidity in my City</div>
+	<div id="icon"> Icon</div>
+	<script type="text/javascript">
+		
+fetch('http://api.openweathermap.org/data/2.5/weather?q=chennai&appid=384db1ce93218e20fd384d3016372238&units=metric')
+.then(response => response.json())
+.then(function(weatherjson){
+		var temp = weatherjson.main.temp;
+		console.log('tempe',temp);
+		var humi = weatherjson.main.humidity;
+		var ico=weatherjson.weather[0].icon;
+		document.getElementById("temp").innerHTML = temp;
+		document.getElementById("humi").innerHTML = humi;
+		document.getElementById("icon").innerHTML = ico;
+
+	});
+
+/*
+fetch('https://jsonplaceholder.typicode.com/todos/1')
+  .then(response => response.json())
+  .then(json => console.log(json))
+
+*/
+	</script>
+
+</body>
+</html>
