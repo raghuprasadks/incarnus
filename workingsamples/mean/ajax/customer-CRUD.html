@@ -36,6 +36,9 @@
 		var email = document.getElementById("email").value;
 		var cust = new Customer(name,mobile,email);
 
+		var status = validateData(cust);
+		if (status ==false)
+			return;
 		var count = customerList.push(cust);
 		console.log('count ',count);
 		console.log('customer list ',customerList);
@@ -47,6 +50,37 @@
 		this.name= name;
 		this.mobile = mobile;
 		this.email = email;
+	}
+
+	function validateData(cust){
+
+		if (cust.name =="")
+		{
+			alert("Please enter your name ");
+			document.getElementById("name").focus();
+			return false;
+		}
+
+		if (cust.mobile =="")
+		{
+			alert("Please enter your mobile number ");
+			document.getElementById("mobile").focus();
+			return false;
+		}
+
+		if (cust.email =="")
+		{
+			alert("Please enter your email ");
+			document.getElementById("email").focus();
+			return false;
+		}
+
+		if (cust.email.indexOf("@", 0) < 0)				 
+		{ 
+			window.alert("Please enter a valid e-mail address."); 
+			email.focus(); 
+			return false; 
+		}
 	}
 
 	function displayCustomers(cust,count){
@@ -97,7 +131,6 @@
 	//	edit = this.parentNode.firstChild;
 		count =event.srcElement.id;
 	//	editedValue = todoedit.value;
-
 		var par = this.parentNode;
 		console.log('parent ',par);
 		var editedName = par.childNodes[0].value;
@@ -107,9 +140,8 @@
 
 		var editedCustomer = new Customer(editedName,editedMobile,editedEmail);
 	
-	customerList[count-1] = editedCustomer;
-	console.log('customerList after update :',customerList);
-
+		customerList[count-1] = editedCustomer;
+		console.log('customerList after update :',customerList);
 	}
 
 	function deleteCustomer(){
