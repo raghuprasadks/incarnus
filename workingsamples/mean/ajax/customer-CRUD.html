@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Customers</title>
+</head>
+<body>
+<h1>Customer Master</h1>
+<input type="text" id="name" placeholder="Enter Name"><br>
+<input type="text" id="mobile" placeholder="Enter Mobile"><br>
+
+<input type="text" id="email" placeholder="Enter Email"><br>
+
+
+<button id='submit' onclick="addCustomer()">Submit</button>
+
+<div id="result"></div>
+
+<script type="text/javascript">
+	var customerList = [];
+	
+
+	function deleteToDo()
+	{
+		console.log('index to be removed '+index);
+		todolist.splice(index);
+		console.log('after removal ' +todolist);
+	}
+
+	/*
+	Adds customer to CustomerList
+	*/
+	function addCustomer()
+	{
+		var name = document.getElementById("name").value;
+		var mobile = document.getElementById("mobile").value;
+		var email = document.getElementById("email").value;
+		var cust = new Customer(name,mobile,email);
+
+		var count = customerList.push(cust);
+		console.log('count ',count);
+		console.log('customer list ',customerList);
+		displayCustomers(cust,count);
+	}
+
+	function Customer(name,mobile,email)
+	{
+		this.name= name;
+		this.mobile = mobile;
+		this.email = email;
+	}
+
+	function displayCustomers(cust,count){
+		var result = '';
+		var outerdiv = document.getElementById("result");
+		var custdiv = document.createElement("div");
+		var name = document.createElement("input");
+		var mobile = document.createElement("input");
+		var email = document.createElement("input");
+		var edit = document.createElement("button");
+		var del = document.createElement("button");
+		var brk = document.createElement("br")
+
+		custdiv.setAttribute("id",count);
+		edit.setAttribute("id",count);
+		del.setAttribute("id",count);
+		// name
+		name.type = "text";
+		name.value = cust.name;
+
+		// mobile
+		mobile.type = "text";
+		mobile.value = cust.mobile;
+
+		// email
+		email.type = "text";
+		email.value = cust.email;
+
+		edit.innerText ="Edit";
+		del.innerText ="Delete";
+		custdiv.appendChild(name);
+		custdiv.appendChild(mobile);
+		custdiv.appendChild(email);
+
+		custdiv.appendChild(edit);
+		custdiv.appendChild(del);
+		custdiv.appendChild(brk);
+		outerdiv.append(custdiv);
+		edit.addEventListener("click",editCustomer);
+		del.addEventListener("click",deleteCustomer);	
+		
+	}
+
+	function editCustomer(){
+		console.log('edit clicked');
+		var editedValue='';
+		console.log(this.parentNode.firstChild.innerHTML);
+	//	edit = this.parentNode.firstChild;
+		count =event.srcElement.id;
+	//	editedValue = todoedit.value;
+
+		var par = this.parentNode;
+		console.log('parent ',par);
+		var editedName = par.childNodes[0].value;
+		var editedMobile = par.childNodes[1].value;
+		var editedEmail = par.childNodes[2].value;
+		console.log(' name : ',editedName, ' mobile :',editedMobile,' email :',editedEmail);
+
+		var editedCustomer = new Customer(editedName,editedMobile,editedEmail);
+	
+	customerList[count-1] = editedCustomer;
+	console.log('customerList after update :',customerList);
+
+	}
+
+	function deleteCustomer(){
+		console.log('delete clicked');
+		console.log(event.srcElement.id);
+		console.log(this.parentNode);
+		count = event.srcElement.id;
+		var pare = this.parentNode;
+		pare.remove();
+		customerList.splice(count-1,1);
+		console.log('after deletion :',customerList);
+	}
+</script>
+</body>
+</html>
