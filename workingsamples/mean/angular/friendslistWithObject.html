@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Friends List</title>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
+<style type="text/css">
+	table,tr,td,th{
+		border: 1px solid blue;
+		border-collapse: collapse;
+	}
+</style>
+</head>
+<body>
+<h1>Friends List</h1>
+<div ng-app="friendsApp" ng-controller="friendsController">
+	<form ng-submit="addFriend()">
+		<input type="text" ng-model="friend" placeholder="Enter Your Friend Name"><br>
+
+		<input type="text" ng-model="amtdue" placeholder="Enter Amout Due"><br>
+		
+		<input type="submit" value="Submit">
+	</form>
+	<h1>Here comes my best friends</h1>
+
+	<table>
+		<tr>
+			<th ng-click="orderByMe('name')">Name</th>
+			<th>Amout Due</th>
+		</tr>
+<tr ng-repeat="frdObj in friendList |  orderBy:myOrderBy">
+			<td>{{frdObj.name}}</td>
+			<td>{{frdObj.amtdue}}</td>
+		</tr>
+	</table>
+</div>
+
+<script type="text/javascript">
+	var module = angular.module("friendsApp",[]);
+	module.controller("friendsController",function($scope)
+	{
+		$scope.friendList = [];
+		console.log('my order by ',$scope.myOrderBy);
+		$scope.addFriend = function()
+		{
+			var frdObj = new friendObj($scope.friend,$scope.amtdue);
+			
+			$scope.friendList.push(frdObj);
+			console.log('friend list ',$scope.friendList);
+		};
+		$scope.orderByMe = function(field)
+		{
+			console.log('field', field);
+			$scope.myOrderBy = field;	
+		};
+
+		function friendObj(name,amtdue)
+		{
+			console.log('friend Obj ',name,amtdue)
+			this.name = name;
+			this.amtdue = amtdue;
+		}
+	}); 
+</script>
+</body>
+</html>
