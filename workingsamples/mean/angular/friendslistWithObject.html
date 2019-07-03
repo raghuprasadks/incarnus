@@ -26,9 +26,9 @@
 	<table>
 		<tr>
 			<th ng-click="orderByMe('name')">Name</th>
-			<th>Amout Due</th>
+			<th ng-click="orderByMe('amtdue')">Amout Due</th>
 		</tr>
-<tr ng-repeat="frdObj in friendList |  orderBy:myOrderBy">
+<tr ng-repeat="frdObj in friendList |  orderBy:myOrderBy:reverse">
 			<td>{{frdObj.name}}</td>
 			<td>{{frdObj.amtdue}}</td>
 		</tr>
