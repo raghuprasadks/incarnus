@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Simple Calculator</title>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+</head>
+<body>
+<h1>Simple Calculator</h1>
+<div ng-app="calcApp" ng-controller="calcController">
+	<form ng-submit="calculate()">
+		<input type="text" ng-model="firstnum" placeholder="Enter First Number"><br>
+		<input type="text" ng-model="oper" placeholder="Enter Operator"><br>
+		<input type="text" ng-model="secondnum" placeholder="Enter Second Number">
+		<br>
+		<input type="submit" value="Calculate">
+	</form>
+	<h1>Result is {{res}}</h1>
+</div>
+<script type="text/javascript">
+	var module = angular.module("calcApp",[]);
+	module.controller("calcController",function($scope)
+	{
+		$scope.res = 0;
+		$scope.calculate = function()
+		{
+			if ($scope.oper == '+')
+				$scope.res = parseInt($scope.firstnum)+ parseInt($scope.secondnum);
+		};
+	}); 
+</script>
+</body>
+</html>

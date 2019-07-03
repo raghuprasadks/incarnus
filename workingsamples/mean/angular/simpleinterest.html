@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Simple Interest</title>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
+</head>
+<body>
+<h1>Simple Interest Calculator</h1>
+<div ng-app="calcApp" ng-controller="calcController">
+	<form ng-submit="calculateSI()">
+		<input type="text" ng-model="principal" placeholder="Enter Principal"><br>
+
+		<input type="text" ng-model="roi" placeholder="Enter Rate Of Interest"><br>
+
+		<input type="text" ng-model="time" placeholder="Enter Time in years">
+		<br>
+
+		<input type="submit" value="Calculate">
+	</form>
+	<h1>Simple Interest is {{si}}</h1>
+</div>
+
+<script type="text/javascript">
+	var module = angular.module("calcApp",[]);
+	module.controller("calcController",function($scope)
+	{
+		$scope.si = 0;
+
+		$scope.calculateSI = function()
+		{
+			$scope.si = ($scope.principal*$scope.roi*$scope.time)/100;
+		};
+
+	}); 
+</script>
+
+</body>
+</html>
