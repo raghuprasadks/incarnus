@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Friends List</title>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+</head>
+<body>
+<h1>Friends List</h1>
+<div ng-app="friendsApp" ng-controller="friendsController">
+	<form ng-submit="addFriend()">
+		<input type="text" ng-model="friend" placeholder="Enter Your Friend Name"><br>
+		<input type="submit" value="Submit">
+	</form>
+	<h1>Here comes my best friends</h1>
+	<ul>
+		<li ng-repeat="friend in friendList"> {{friend}}
+		</li>
+	</ul>
+</div>
+<script type="text/javascript">
+	var module = angular.module("friendsApp",[]);
+	module.controller("friendsController",function($scope)
+	{
+		$scope.friendList = [];
+
+		$scope.addFriend = function()
+		{
+			$scope.friendList.push($scope.friend);
+		};
+	}); 
+</script>
+
+</body>
+</html>
