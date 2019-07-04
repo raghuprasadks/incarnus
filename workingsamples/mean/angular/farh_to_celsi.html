@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<body>
+<div ng-app="myApp" ng-controller="myCtrl">
+<h1>Fahrenhit to celsius</h1>
+<form ng-submit="calculateop()">
+<input type="text" ng-model="value" placeholder="Enter The Fahrenhit"><br><br>
+<input type="submit" value="calculate"><br>
+</form>
+<h1>Result is {{val}} </h1>
+</div>
+<script>
+var app = angular.module('myApp', []);
+app.service('celsius', function() {
+    this.myFunc = function (x) {
+    	var result=((x-32)*5)/9;
+       return result;
+    }
+});
+app.controller('myCtrl', function($scope, celsius) {
+	$scope.calculateop=function(){
+		var num=$scope.value;
+ $scope.val = celsius.myFunc(num).toFixed(2);
+}
+});
+</script>
+</body>
+</html>
