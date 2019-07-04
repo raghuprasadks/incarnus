@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>ANGULAR JS</title>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<style type="text/css">
+body{
+background-color: snow;
+}
+table, th , td  {
+  margin-left: 10px;
+  margin-top: 30px;
+  border: 1px solid grey;
+  border-collapse: collapse;
+  padding: 15px;
+  text-align: center;
+
+}
+table tr:nth-child(odd) {
+  background-color: #f1f1f1;
+}
+table tr:nth-child(even) {
+  background-color: #ffffff;
+}
+table tr:hover {
+background-color: #bbb;
+}
+</style>
+</head>
+<body>
+<div ng-app="myApp" ng-controller="myCrtl">
+<h2><center>USER DETAILS</center></h2>
+<table border="1" width="98%">
+<tr>
+<th ng-click="orderByMe('name')">Name</th>
+<th>Email</th>
+<th>Phone</th>
+<th>Website</th>
+<th>City</th>
+<th>Zipcode</th>
+</tr>
+<tr ng-repeat="obj in jsonObj| orderBy:myOrderBy">
+<td>{{obj.name}}</td>
+<td>{{obj.email}}</td>
+<td>{{obj.phone}}</td>
+<td>{{obj.website}}</td>
+<td>{{obj.address.city}}</td>
+<td>{{obj.address.zipcode}}</td>
+</tr>
+</table>
+</div>
+<script>
+var app=angular.module("myApp",[]);
+app.controller('myCrtl',function($scope,$http){
+$http.get("https://jsonplaceholder.typicode.com/users").then(function(response){
+console.log('response',response);
+console.log('response.data',response.data);
+$scope.jsonObj=response.data;
+});
+$scope.orderByMe = function(obj) {
+        $scope.myOrderBy = obj;
+    }
+
+});
+</script>
+</body>
+</html>
