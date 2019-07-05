@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta chrset="UTF 8">
+</head>
+<body ng-app="sampleApp">
+<title>Event Registration</title>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+<h1> Guru99 Global Event</h1>
+
+<div class="container">
+    <ul>
+        <li><a href="#!Angular">Angular JS Topics</a></li>
+        <li><a href="#!Node">Node JS Topics</a></li>
+    </ul>
+    <div ng-view></div>
+</div>
+
+<script>
+    var sampleApp = angular.module('sampleApp',['ngRoute']);
+    sampleApp.config(['$routeProvider',
+
+        function($routeProvider){
+        $routeProvider.
+        when('/Angular',{
+            templateUrl : 'Angular.html',
+            controller: 'AngularController'
+        }).
+        when("/Node", {
+            templateUrl: 'Node.html',
+            controller: 'NodeController'
+        });
+    }]);
+    sampleApp.controller('AngularController',function($scope) {
+
+        $scope.tutorial = [
+            {Name:"Controllers",Description :"Controllers in action"},
+            {Name:"Models",Description :"Models and binding data"},
+            {Name:"Directives",Description :"Flexibility of Directives"}
+        ]
+    });
+
+    sampleApp.controller('NodeController',function($scope){
+
+        $scope.tutorial = [
+            {Name:"Promises",Description :"Power of Promises"},
+            {Name:"Event",Description :"Event of Node.js"},
+            {Name:"Modules",Description :"Modules in Node.js"}
+            ]
+    });
+
+</script>
+</body>
+</html>
