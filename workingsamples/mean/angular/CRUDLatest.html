@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<body ng-app="myApp" ng-controller="userCtrl">
+
+<div class="w3-container">
+
+<h3>Users</h3>
+
+<table class="w3-table w3-bordered w3-striped">
+  <tr>
+    <th>Edit</th>
+    <th>First Name</th>
+    <th>Last Name</th>
+  </tr>
+  <tr ng-repeat="user in users">
+    <td>
+      <button class="w3-btn w3-ripple" ng-click="editUser(user.id)">&#9998; Edit</button>
+    </td>
+    <td>{{ user.fName }}</td>
+    <td>{{ user.lName }}</td>
+  </tr>
+</table>
+<br>
+<button class="w3-btn w3-green w3-ripple" ng-click="editUser('new')">&#9998; Create New User</button>
+
+<form ng-hide="hideform" ng-submit="addUser()">
+  <h3 ng-show="edit">Create New User:</h3>
+  <h3 ng-hide="edit">Edit User:</h3>
+    <label>First Name:</label>
+    <input class="w3-input w3-border" type="text" ng-model="fName" ng-disabled="!edit" placeholder="First Name">
+  <br>
+    <label>Last Name:</label>
+    <input class="w3-input w3-border" type="text" ng-model="lName" ng-disabled="!edit" placeholder="Last Name">
+  <br>
+    <label>Password:</label>
+    <input class="w3-input w3-border" type="password" ng-model="passw1" placeholder="Password">
+  <br>
+    <label>Repeat:</label>
+    <input class="w3-input w3-border" type="password" ng-model="passw2" placeholder="Repeat Password">
+  <br>
+  <button type="submit" class="w3-btn w3-green w3-ripple" ng-disabled="error || incomplete">&#10004; Save Changes</button>
+</form>
+
+</div>
+
+<script>
+  angular.module('myApp', []).controller('userCtrl', function($scope) {
+
+$scope.addUser =(function () {
+  console.log('add user');
+
+  if($scope.isNew)
+  {
+    newid = $scope.users.length +1;
+    var newuser = {id:newid, fName:$scope.fName, lName:$scope.lName};
+  console.log('new user ',newuser);
+  $scope.users.push(newuser);
+  }else
+  {
+    var usersArray = $scope.users;
+    console.log('id from scope',$scope.id);
+    for (i=0;i<usersArray.length;i++)
+    {
+      console.log('inside loop id ',usersArray[i].id);
+      if (usersArray[i].id == $scope.id-1)
+      {
+        var editeduser = {id:$scope.id, fName:$scope.fName, lName:$scope.lName};
+        $scope.users[i+1] = editeduser;
+      }
+    }
+    console.log('edited user ',$scope.users);
+  }
+
+
+$scope.fName = '';
+$scope.lName = '';
+$scope.passw1 = '';
+$scope.passw2 = '';
+});
+
+
+$scope.fName = '';
+$scope.lName = '';
+$scope.passw1 = '';
+$scope.passw2 = '';
+$scope.users = [
+{id:1, fName:'Hege', lName:"Pege" },
+{id:2, fName:'Kim',  lName:"Pim" },
+{id:3, fName:'Sal',  lName:"Smith" },
+{id:4, fName:'Jack', lName:"Jones" },
+{id:5, fName:'John', lName:"Doe" },
+{id:6, fName:'Peter',lName:"Pan" }
+];
+$scope.edit = true;
+$scope.error = false;
+$scope.incomplete = false; 
+$scope.hideform = true; 
+$scope.editUser = function(id) {
+  $scope.hideform = false;
+  if (id == 'new') {
+    //co
+    $scope.edit = true;
+    $scope.isNew = true;
+
+    $scope.incomplete = true;
+    $scope.fName = '';
+    $scope.lName = '';
+    } else {
+   // $scope.edit = false;
+   $scope.isNew = false;
+   $scope.id =id;
+   $scope.edit = true;
+    $scope.fName = $scope.users[id-1].fName;
+    $scope.lName = $scope.users[id-1].lName;
+ /*var newuser = {id:$scope.id, fName:$scope.fName, lName:$scope.lName};
+console.log('new user ',newuser);
+$scope.users.push(newuser);
+$scope.fName = '';
+$scope.lName = '';
+$scope.passw1 = '';
+$scope.passw2 = '';*/  }
+};
+
+$scope.$watch('passw1',function() {$scope.test();});
+$scope.$watch('passw2',function() {$scope.test();});
+$scope.$watch('fName', function() {$scope.test();});
+$scope.$watch('lName', function() {$scope.test();});
+
+$scope.test = function() {
+  if ($scope.passw1 !== $scope.passw2) {
+    $scope.error = true;
+    } else {
+    $scope.error = false;
+  }
+  $scope.incomplete = false;
+  if ($scope.edit && (!$scope.fName.length ||
+  !$scope.lName.length ||
+  !$scope.passw1.length || !$scope.passw2.length)) {
+     $scope.incomplete = true;
+  }
+};
+
+});
+</script>
+
+</body>
+</html>
+
