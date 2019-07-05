@@ -3,23 +3,25 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 <body ng-app="myApp" ng-controller="userCtrl">
-
 <div class="w3-container">
-
 <h3>Users</h3>
-
 <table class="w3-table w3-bordered w3-striped">
   <tr>
-    <th>Edit</th>
+
     <th>First Name</th>
     <th>Last Name</th>
+    <th>Edit</th>
   </tr>
   <tr ng-repeat="user in users">
+    
+    <td>{{ user.fName }}</td>
+    <td>{{ user.lName }}</td>
     <td>
       <button class="w3-btn w3-ripple" ng-click="editUser(user.id)">&#9998; Edit</button>
     </td>
-    <td>{{ user.fName }}</td>
-    <td>{{ user.lName }}</td>
+    <td>
+      <button class="w3-btn w3-ripple" ng-click="deleteUser(user.id)">&#9249; Delete</button>
+    </td>
   </tr>
 </table>
 <br>
@@ -61,17 +63,30 @@ $scope.addUser =(function () {
   {
     var usersArray = $scope.users;
     console.log('id from scope',$scope.id);
+    var idtocheck = $scope.id-1
+    console.log('id to check ',idtocheck);
+    var editeduser = {id:$scope.id, fName:$scope.fName, lName:$scope.lName};
+        $scope.users[idtocheck] = editeduser;
+    
+    /**
     for (i=0;i<usersArray.length;i++)
     {
       console.log('inside loop id ',usersArray[i].id);
-      if (usersArray[i].id == $scope.id-1)
+
+      if (usersArray[i].id == idtocheck)
       {
         var editeduser = {id:$scope.id, fName:$scope.fName, lName:$scope.lName};
         $scope.users[i+1] = editeduser;
       }
-    }
+    } **/
     console.log('edited user ',$scope.users);
   }
+
+
+
+
+
+
 
 
 $scope.fName = '';
@@ -79,6 +94,25 @@ $scope.lName = '';
 $scope.passw1 = '';
 $scope.passw2 = '';
 });
+
+$scope.deleteUser =(function (id) {
+  console.log('delete user',id);
+    var indextodelete = id-1;
+    var whatisdelted='';
+    console.log('array length ',$scope.users.length);
+    if ($scope.users.length == 1)
+    {
+      whatisdelted = $scope.users.splice(indextodelete,$scope.users.length);
+    }
+    else
+    {
+      whatisdelted = $scope.users.splice(indextodelete,1);
+    }
+    console.log('what is deleted ',whatisdelted);
+
+console.log('List after deletion ',$scope.users);
+
+  });
 
 
 $scope.fName = '';
@@ -99,7 +133,10 @@ $scope.incomplete = false;
 $scope.hideform = true; 
 $scope.editUser = function(id) {
   $scope.hideform = false;
+  //$scope.isNew = true;
+  console.log('edit user for first time :',id);
   if (id == 'new') {
+    console.log('edit :new :');
     //co
     $scope.edit = true;
     $scope.isNew = true;
@@ -107,7 +144,9 @@ $scope.editUser = function(id) {
     $scope.incomplete = true;
     $scope.fName = '';
     $scope.lName = '';
-    } else {
+  } else {
+  console.log('edit :else :');
+    
    // $scope.edit = false;
    $scope.isNew = false;
    $scope.id =id;
