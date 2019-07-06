@@ -17,7 +17,7 @@
     <td>{{ user.fName }}</td>
     <td>{{ user.lName }}</td>
     <td>
-      <button class="w3-btn w3-ripple" ng-click="editUser(user.id)">&#9998; Edit</button>
+      <button class="w3-btn w3-ripple" ng-click="creatUser(user.id)">&#9998; Edit</button>
     </td>
     <td>
       <button class="w3-btn w3-ripple" ng-click="deleteUser(user.id)">&#9249; Delete</button>
@@ -25,7 +25,7 @@
   </tr>
 </table>
 <br>
-<button class="w3-btn w3-green w3-ripple" ng-click="editUser('new')">&#9998; Create New User</button>
+<button class="w3-btn w3-green w3-ripple" ng-click="createUser('new')">&#9998; Create New User</button>
 
 <form ng-hide="hideform" ng-submit="addUser()">
   <h3 ng-show="edit">Create New User:</h3>
@@ -101,7 +101,7 @@ $scope.edit = true;
 $scope.error = false;
 $scope.incomplete = false; 
 $scope.hideform = true; 
-$scope.editUser = function(id) {
+$scope.creatUser = function(id) {
   $scope.hideform = false;
   console.log('edit user for first time :',id);
   if (id == 'new') {
