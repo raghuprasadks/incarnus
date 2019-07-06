@@ -1,0 +1,104 @@
+Install mongodb
+
+create data folder
+under data crete db and log folder
+
+A. to run mongo
+
+go to bin folder  and type mongod from command prompt
+type mongo from bin to execute mongo commands
+
+
+B.Running mongo as a service
+mongod --directoryperdb --dbpath c:\mongodb\db --logpath c:\mongodb\log\mongo.log --lopappend --rest --install
+
+removed --rest..
+  
+mongod --directoryperdb --dbpath c:\mongodb\db --logpath c:\mongodb\log\mongo.log --lopappend --rest --install
+
+net start MongoDB
+
+Mongo Commands
+
+1. show dbs
+2. use incarnus
+3. db
+4.Create user
+db.createUser
+(
+{
+	user:"raghu",
+	pwd:"test123",
+	roles:["readWrite","dbAdmin"]
+}
+);
+5. db.createCollection('customers');
+6. show collections
+
+7. db.customers.insert({first_name:"Raghu",last_name:"Prasad"});
+
+8. db.customers.insert([{first_name:"Vidya",last_name:"Prasad"},
+{first_name:"Satvik",last_name:"Kumar"},
+{first_name:"Samhita",last_name:"Kumari"}]);
+9. db.customers.find(); 
+10. db.customers.pretty();
+11. db.customers.update({first_name:"Raghu"},
+{first_name:"Raghu",last_name:
+"Prasad K S",city:"Bengaluru"});
+12. db.customers.update({first_name:"Vidya"},
+{$set:{city:"Chennai",last_name:"Prasad K S"}});
+13. db.customers.update({first_name:"Satvik"},{$set:{age:14}});
+
+14. db.customers.update({first_name:"Satvik"},{$inc:{age:1}});
+15. db.customers.find({first_name:"Satvik"});
+16. db.customers.update({first_name:"Satvik"},{$unset:{age:1}});
+
+17. db.customers.update({first_name:"Aparna"},
+{first_name:"Aparna",last_name:
+"Manoj",city:"Bengaluru"},{upsert:true});
+
+18. db.customers.update({first_name:"Raghu"},
+{$rename:{"city":"location"}});
+19. db.customers.remove({first_name:"Raghu"});
+20. db.customers.remove({first_name:"Vidya"},{justOne:true});
+21. 
+db.customers.insert([{
+	first_name:"Tory",
+	last_name:"Makons",
+	gender:"male",
+	age:33,
+	address:{
+			street:"432 Essex st",
+			city:"Lawrence",
+			state:"MA"
+		},
+		memberships:["mem1","mem2"],
+		balance:125.32
+},
+{
+	first_name:"Beth",
+	last_name:"Jenkins",
+	gender:"female",
+	age:23,
+	address:{
+			street:"411 Blue st",
+			city:"Boston",
+			state:"MA"
+		},
+		memberships:["mem2","mem3"],
+		balance:505.33
+}]);
+
+22. db.customers.find({$or:[{first_name:"Tory"},{first_name:"Beth"}]});
+
+23. db.customers.find({age:{$lt:40}}); 
+24. lte, gt,gte
+25. db.customers.find({"address.city":"Boston"});
+26. db.customers.find({"memberships":"mem1"});
+27. db.customers.find().sort({last_name:1});
+28. db.customers.find().sort({last_name:-1});
+29. db.customers.find().count();
+30. db.customers.find({gender:"male"}).count();
+31. db.customers.find().limit(4);
+32. db.customers.find().limit(4).sort({last_name:1});
+33. db.customers.find().forEach(function(doc){print("Customer Name :"+doc.first_name)});
