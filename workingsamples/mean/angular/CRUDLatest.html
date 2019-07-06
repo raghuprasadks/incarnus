@@ -12,7 +12,7 @@
     <th>Last Name</th>
     <th>Edit</th>
   </tr>
-  <tr ng-repeat="user in users">
+  <tr ng-repeat="user in users" ng-show=user.active>
     
     <td>{{ user.fName }}</td>
     <td>{{ user.lName }}</td>
@@ -56,7 +56,7 @@ $scope.addUser =(function () {
   if($scope.isNew)
   {
     newid = $scope.users.length +1;
-    var newuser = {id:newid, fName:$scope.fName, lName:$scope.lName};
+    var newuser = {id:newid, fName:$scope.fName, lName:$scope.lName,active:true};
   console.log('new user ',newuser);
   $scope.users.push(newuser);
   }else
@@ -65,30 +65,11 @@ $scope.addUser =(function () {
     console.log('id from scope',$scope.id);
     var idtocheck = $scope.id-1
     console.log('id to check ',idtocheck);
-    var editeduser = {id:$scope.id, fName:$scope.fName, lName:$scope.lName};
+    var editeduser = {id:$scope.id, fName:$scope.fName, lName:$scope.lName,active:true};
         $scope.users[idtocheck] = editeduser;
     
-    /**
-    for (i=0;i<usersArray.length;i++)
-    {
-      console.log('inside loop id ',usersArray[i].id);
-
-      if (usersArray[i].id == idtocheck)
-      {
-        var editeduser = {id:$scope.id, fName:$scope.fName, lName:$scope.lName};
-        $scope.users[i+1] = editeduser;
-      }
-    } **/
-    console.log('edited user ',$scope.users);
+      console.log('edited user ',$scope.users);
   }
-
-
-
-
-
-
-
-
 $scope.fName = '';
 $scope.lName = '';
 $scope.passw1 = '';
@@ -97,69 +78,48 @@ $scope.passw2 = '';
 
 $scope.deleteUser =(function (id) {
   console.log('delete user',id);
-    var indextodelete = id-1;
-    var whatisdelted='';
-    console.log('array length ',$scope.users.length);
-    if ($scope.users.length == 1)
-    {
-      whatisdelted = $scope.users.splice(indextodelete,$scope.users.length);
-    }
-    else
-    {
-      whatisdelted = $scope.users.splice(indextodelete,1);
-    }
-    console.log('what is deleted ',whatisdelted);
-
-console.log('List after deletion ',$scope.users);
-
-  });
+  var indextodelete = id-1;
+  $scope.users[indextodelete].active =false;
+  console.log('List after deletion ',$scope.users);
+});
 
 
 $scope.fName = '';
 $scope.lName = '';
 $scope.passw1 = '';
 $scope.passw2 = '';
+
 $scope.users = [
-{id:1, fName:'Hege', lName:"Pege" },
-{id:2, fName:'Kim',  lName:"Pim" },
-{id:3, fName:'Sal',  lName:"Smith" },
-{id:4, fName:'Jack', lName:"Jones" },
-{id:5, fName:'John', lName:"Doe" },
-{id:6, fName:'Peter',lName:"Pan" }
+{id:1, fName:'Hege', lName:"Pege",active:true },
+{id:2, fName:'Kim',  lName:"Pim",active:true },
+{id:3, fName:'Sal',  lName:"Smith",active:true },
+{id:4, fName:'John', lName:"Doe",active:true },
+{id:5, fName:'Peter',lName:"Pan",active:true }
 ];
+
 $scope.edit = true;
 $scope.error = false;
 $scope.incomplete = false; 
 $scope.hideform = true; 
 $scope.editUser = function(id) {
   $scope.hideform = false;
-  //$scope.isNew = true;
   console.log('edit user for first time :',id);
   if (id == 'new') {
     console.log('edit :new :');
-    //co
     $scope.edit = true;
     $scope.isNew = true;
-
     $scope.incomplete = true;
     $scope.fName = '';
     $scope.lName = '';
   } else {
   console.log('edit :else :');
-    
-   // $scope.edit = false;
+
    $scope.isNew = false;
    $scope.id =id;
    $scope.edit = true;
-    $scope.fName = $scope.users[id-1].fName;
-    $scope.lName = $scope.users[id-1].lName;
- /*var newuser = {id:$scope.id, fName:$scope.fName, lName:$scope.lName};
-console.log('new user ',newuser);
-$scope.users.push(newuser);
-$scope.fName = '';
-$scope.lName = '';
-$scope.passw1 = '';
-$scope.passw2 = '';*/  }
+  $scope.fName = $scope.users[id-1].fName;
+  $scope.lName = $scope.users[id-1].lName;
+}
 };
 
 $scope.$watch('passw1',function() {$scope.test();});
