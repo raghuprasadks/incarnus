@@ -27,7 +27,7 @@
 <br>
 <button class="w3-btn w3-green w3-ripple" ng-click="editUser('new')">&#9998; Create New User</button>
 
-<form ng-hide="hideform" ng-submit="saveUser()">
+<form ng-hide="hideform" ng-submit="addUser()">
   <h3 ng-show="edit">Create New User:</h3>
   <h3 ng-hide="edit">Edit User:</h3>
     <label>First Name:</label>
@@ -50,12 +50,14 @@
 <script>
   angular.module('myApp', []).controller('userCtrl', function($scope) {
 
-$scope.saveUser=(function () {
-console.log('save user');
-if($scope.isNew)
+$scope.addUser =(function () {
+  console.log('add user');
+
+  if($scope.isNew)
   {
     newid = $scope.users.length +1;
     var newuser = {id:newid, fName:$scope.fName, lName:$scope.lName,active:true};
+  console.log('new user ',newuser);
   $scope.users.push(newuser);
   }else
   {
@@ -65,10 +67,9 @@ if($scope.isNew)
     console.log('id to check ',idtocheck);
     var editeduser = {id:$scope.id, fName:$scope.fName, lName:$scope.lName,active:true};
         $scope.users[idtocheck] = editeduser;
-  
+    
       console.log('edited user ',$scope.users);
   }
-
 $scope.fName = '';
 $scope.lName = '';
 $scope.passw1 = '';
@@ -76,7 +77,7 @@ $scope.passw2 = '';
 });
 
 $scope.deleteUser =(function (id) {
-  console.log('Click of delete');
+  console.log('delete user',id);
   var indextodelete = id-1;
   $scope.users[indextodelete].active =false;
   console.log('List after deletion ',$scope.users);
@@ -102,7 +103,7 @@ $scope.incomplete = false;
 $scope.hideform = true; 
 $scope.editUser = function(id) {
   $scope.hideform = false;
-  console.log('Create user is clicked :',id);
+  console.log('edit user for first time :',id);
   if (id == 'new') {
     console.log('edit :new :');
     $scope.edit = true;
