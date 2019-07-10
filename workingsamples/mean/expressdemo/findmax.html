@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>To find maximum</title>
+</head>
+<body>
+<h1>Maximum</h1>
+<script type="text/javascript">
+data = [
+  {x: 1, y: 14830},
+  {x: 2, y: 85055},
+  {x: 3, y: 03485},
+  {x: 4, y: 57885}
+ ];
+
+ var products = [
+   {id:1001,name:"mobile1718",description: "Smart phone vivo 1718",rate:18000,manufacturer:"vivo"},
+   {id:1002,name:"mobile1719",description:"Smart phone vivo 1719",rate:20000,manufacturer:"vivo"},
+   {id:1003,name:"TV40",description:"Sony Bravio",rate:56000,manufacturer:"sony"},
+   {id:1004,name:"TV80",description:"Sony Bravio 80 Internet",rate:90000,manufacturer:"sony"},
+   {id:1005,name:"IMAC",description:"IMAC",rate:150000,manufacturer:"apple"}
+];
+
+ function getMaxY() {
+  return data.reduce((max, p) => p.y > max ? p.y : max, data[0].y);
+}
+
+function getMaxProduct() {
+  return products.reduce((max, p) => p.rate > max ? p.rate : max, products[0].rate);
+}
+
+
+var maxvalue = getMaxY();
+console.log('maximum value of Y',maxvalue);
+
+var maximumvalue = getMaxProduct();
+console.log('maximum product value',maximumvalue);
+</script>
+</body>
+</html>
+
+
